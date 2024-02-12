@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    // 라이브러리에 대한 Dependency까지 관리해줌, 다른 라이브러리들 과정까지 다 올라감
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'jpabook'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+// lombok에서 필요한 configurations임
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // 캐시 삭제해주고 리로딩 같은거 되도록 만들어줌
+    implementation 'org.springframework.boot:spring-boot-devtools:3.1.2'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'// 스프링부트가 미리 세팅 안해놓은 라이브러리들은 버전 직접 적어줘야함
+
+    testImplementation 'junit:junit:4.13.1'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
