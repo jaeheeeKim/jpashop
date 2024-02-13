@@ -2,16 +2,21 @@ package jpabook.jpashop.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository // Component 스캔의 대상이 되어서 스프링 빈이 등록해줌
+@RequiredArgsConstructor
 public class MemberRepository {
     @PersistenceContext // 엔티티 매니저를 주입해줌
-    private EntityManager em;
+    private final EntityManager em;
+
+//    public MemberRepository(EntityManager em){ // injection 생략하고 @RequiredArgsConstructor
+//        this.em = em;
+//    }
 
     public void save(Member member) {
         em.persist(member);
