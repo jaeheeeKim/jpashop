@@ -29,6 +29,7 @@ dependencies {
     // 캐시 삭제해주고 리로딩 같은거 되도록 만들어줌
     implementation 'org.springframework.boot:spring-boot-devtools:3.1.2'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'// 스프링부트가 미리 세팅 안해놓은 라이브러리들은 버전 직접 적어줘야함
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     testImplementation 'junit:junit:4.13.1'
     compileOnly 'org.projectlombok:lombok'
