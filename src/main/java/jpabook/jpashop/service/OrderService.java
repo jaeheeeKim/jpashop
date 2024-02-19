@@ -1,6 +1,5 @@
 package jpabook.jpashop.service;
 
-import jakarta.transaction.TransactionScoped;
 import jpabook.jpashop.domain.Delivery;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
@@ -9,6 +8,7 @@ import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = true) // 읽기전용이라 조회 성능 최적화!
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -24,6 +24,7 @@ public class OrderService {
     private  final ItemRepository itemRepository;
 
     /** 주문 */
+    @Transactional // 데이터 변경하는건 꼭 트랜젝션이 있어야함!⭐ public 메소드들은 다 걸림
     public Long order(Long memberId, Long itemId, int count) {
         // 엔티티 조회
         Member member = memberRepository.findOne(memberId);
@@ -56,7 +57,7 @@ public class OrderService {
     }
 
     /** 검색 */
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//        return orderRepository.findAll(orderSearch);
-//    }
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 }
