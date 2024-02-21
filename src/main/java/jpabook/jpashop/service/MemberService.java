@@ -3,7 +3,6 @@ package jpabook.jpashop.service;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,4 +49,11 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) { // 변경 감지
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }// 영속 상태의 멤버를 setName으로 바꿔주고 이 메소드가 종료되면 @Transactional에 의해서 트랜잭션 관련된 AOP가 딱 끝나는 시점에
+     // 트랜잭션 커밋이 된다 그때 JPA가 플러쉬하고 영속성 컨텍스트 다 커밋 해버림
 }

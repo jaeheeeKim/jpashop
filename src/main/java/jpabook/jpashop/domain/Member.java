@@ -15,7 +15,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    @NotEmpty // javax validation 패키지 내에 있음 // 🚫name을 username으로 수정한다던지 변경작업이 이루어지면 API 스펙 자체가 바귀는 문제가 커짐🚫
+    @NotEmpty // javax validation 패키지 내에 있음 // 🚫api v1은 name을 username으로 수정한다던지 변경작업이 이루어지면 API 스펙 자체가 바귀는 문제가 커짐🚫
     private String name;
     @Embedded// 내장 타입을 포함했다는 뜻
     private Address address;
