@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,11 +21,12 @@ public class Order {
     @Id @GeneratedValue
     @Column(name="order_id")
     private Long id;
-                            // 지연로딩⭐
+                            // 지연로딩⭐ DB에서 조회를 하는게 아님
     @ManyToOne(fetch = LAZY) // 여러 주문에 한 멤버 연관관계
     @JoinColumn(name = "member_id")// foreign key 매핑을 무엇으로 할건지
     private Member member;
 
+    @BatchSize(size = 1000) // V3.1 컬렉션을 적용할 때
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // order만 orderItem을 사용하기때문에 cascade 가능함
     private List<OrderItem> orderItems = new ArrayList<>();
 

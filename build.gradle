@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-devtools:3.1.2'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'// 스프링부트가 미리 세팅 안해놓은 라이브러리들은 버전 직접 적어줘야함
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5' // ByteBuddyinterceptor() 같은 클래스가 대신 들어갈 경우 hibernate5Module 이용을 위해 넣어줌
 
     testImplementation 'junit:junit:4.13.1'
     compileOnly 'org.projectlombok:lombok'

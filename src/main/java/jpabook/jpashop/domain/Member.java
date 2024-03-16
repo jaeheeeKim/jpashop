@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class Member {
-    @Id @GeneratedValue
+    @Id @GeneratedValue // Primary key 지정
     @Column(name = "member_id")
     private Long id;
 
@@ -20,6 +21,7 @@ public class Member {
     @Embedded// 내장 타입을 포함했다는 뜻
     private Address address;
 
+    @JsonIgnore // 엔티티 직접 노출
     @OneToMany(mappedBy = "member") // 한 멤버에 여러 주문 연관관계
     // 연관관계의 주인이 아닐때, member는 매핑을 하는게 아니라 매핑된 거울일 뿐이며 읽기 전용이 됨
     private List<Order> orders = new ArrayList<>();

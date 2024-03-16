@@ -5,10 +5,12 @@ import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@BatchSize(size = 100) // // V3.1 컬렉션이 아닐 경우 적용할 때
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // joined는 가장 정교화된 스타일, singleTable은 한 테이블에 다 넣는것
 @DiscriminatorColumn(name = "dtype")

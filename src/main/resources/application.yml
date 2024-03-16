@@ -7,14 +7,22 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none # ?????? ?? ??? ??? ????
+      ddl-auto: create # create 일 때는! 실행시 모두 drop 하고 다시 create 해줌
     properties:
       hibernate:
-        format_sql: true
     #   show_sql: true # sout? ???? ???
+        format_sql: true
+        default_batch_fetch_size: 100 # 페이징과 한계 돌파 / 예를 들어 10으로 사이즈를 설정 해놓고 id값을 100개 조회한다면, in쿼리문이 10번 찍히는거임!ㄴ
 
 # hibernate SQL ??? ??? ??? ??? ???, JPA? Hibernate? ???? SQL? ? ??
 logging:
   level:
     org.hibernate.sql: debug
     org.hibernate.type: trace
+
+# 한글 깨지는 현상 방지
+server:
+  port: 8080
+  servlet:
+    encoding:
+      force-response: true
